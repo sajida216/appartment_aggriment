@@ -1,6 +1,7 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
+import { Card } from '@/components/Card';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -20,6 +21,62 @@ export default function HomeScreen() {
         <ThemedText type="title">Welcome!</ThemedText>
         <HelloWave />
       </ThemedView>
+      
+      {/* Example 1: Basic Card */}
+      <Card title="Basic Card" subtitle="A simple card with title and content">
+        <ThemedText>
+          This is a basic card component with default styling. It includes a title, subtitle, and content area.
+        </ThemedText>
+      </Card>
+
+      {/* Example 2: Card with custom styling */}
+      <Card 
+        title="Custom Styled Card" 
+        subtitle="Card with custom colors and spacing"
+        lightColor="#f0f8ff"
+        darkColor="#1a1a2e"
+        padding={20}
+        borderRadius={16}
+        elevation={4}
+      >
+        <ThemedText>
+          This card has custom background colors, increased padding, rounded corners, and enhanced shadow.
+        </ThemedText>
+      </Card>
+
+      {/* Example 3: Card with content only */}
+      <Card>
+        <ThemedText type="subtitle">Content Only Card</ThemedText>
+        <ThemedText>
+          This card doesn't have a title prop, just content. You can put any React components inside.
+        </ThemedText>
+      </Card>
+
+      {/* Example 4: Card with complex content */}
+      <Card 
+        title="Complex Content" 
+        subtitle="Card with multiple elements"
+        style={styles.complexCard}
+      >
+        <ThemedView style={styles.infoRow}>
+          <ThemedText type="defaultSemiBold">Status:</ThemedText>
+          <ThemedText>Active</ThemedText>
+        </ThemedView>
+        <ThemedView style={styles.infoRow}>
+          <ThemedText type="defaultSemiBold">Platform:</ThemedText>
+          <ThemedText>
+            {Platform.select({
+              ios: 'iOS',
+              android: 'Android',
+              web: 'Web',
+            })}
+          </ThemedText>
+        </ThemedView>
+        <ThemedText style={styles.marginTop}>
+          This card demonstrates how you can include complex layouts and multiple components within a card.
+        </ThemedText>
+      </Card>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
@@ -71,5 +128,16 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  complexCard: {
+    marginBottom: 16,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  marginTop: {
+    marginTop: 8,
   },
 });
