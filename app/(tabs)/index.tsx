@@ -22,11 +22,38 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       
-      {/* Example 1: Basic Card */}
-      <Card title="Basic Card" subtitle="A simple card with title and content">
-        <ThemedText>
-          This is a basic card component with default styling. It includes a title, subtitle, and content area.
-        </ThemedText>
+      {/* Example 4: Card with complex content */}
+      <Card 
+        title="SkyLine Apartments" 
+        subtitle="Card with multiple elements"
+        style={styles.complexCard}
+        lightColor="#f0f8ff"
+        darkColor="#1a1a2e"
+        padding={20}
+        borderRadius={16}
+        elevation={4}
+      >
+        <ThemedView 
+        lightColor="#f0f8ff"
+        darkColor="#1a1a2e"
+        style={styles.infoRow}>
+          <ThemedText type="defaultSemiBold">Status:</ThemedText>
+          <ThemedText>Active</ThemedText>
+        </ThemedView>
+        <ThemedView  
+        lightColor="#f0f8ff"
+        darkColor="#1a1a2e"
+        style={styles.infoRow}>
+          <ThemedText type="defaultSemiBold">Platform:</ThemedText>
+          <ThemedText>
+            {Platform.select({
+              ios: 'iOS',
+              android: 'Android',
+              web: 'Web',
+            })}
+          </ThemedText>
+        </ThemedView>
+        
       </Card>
 
       {/* Example 2: Card with custom styling */}
@@ -52,30 +79,7 @@ export default function HomeScreen() {
         </ThemedText>
       </Card>
 
-      {/* Example 4: Card with complex content */}
-      <Card 
-        title="Complex Content" 
-        subtitle="Card with multiple elements"
-        style={styles.complexCard}
-      >
-        <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Status:</ThemedText>
-          <ThemedText>Active</ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Platform:</ThemedText>
-          <ThemedText>
-            {Platform.select({
-              ios: 'iOS',
-              android: 'Android',
-              web: 'Web',
-            })}
-          </ThemedText>
-        </ThemedView>
-        <ThemedText style={styles.marginTop}>
-          This card demonstrates how you can include complex layouts and multiple components within a card.
-        </ThemedText>
-      </Card>
+      
 
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
