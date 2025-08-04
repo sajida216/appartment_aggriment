@@ -1,6 +1,7 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
+import { useRouter } from 'expo-router';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 
@@ -9,9 +10,12 @@ interface PaymentProgressProps {
   payments: {
     [month: string]: 'paid' | 'unpaid' | 'pending';
   };
+  tenantName?: string;
+  roomNumber?: string;
 }
 
-export function PaymentProgress({ year, payments }: PaymentProgressProps) {
+export function PaymentProgress({ year, payments, tenantName = 'John', roomNumber = 'Room 1' }: PaymentProgressProps) {
+  const router = useRouter();
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const textColor = useThemeColor({}, 'text');
   const iconColor = useThemeColor({}, 'icon');
@@ -42,6 +46,33 @@ export function PaymentProgress({ year, payments }: PaymentProgressProps) {
     }
   };
 
+  const handleStatusPress = (month: string, status: 'paid' | 'unpaid' | 'pending') => {
+    if (status === 'unpaid') {
+      // Navigate to add payment screen for unpaid months (red dots)
+      router.push({
+        pathname: '/add-payment',
+        params: {
+          tenantName,
+          roomNumber,
+          month,
+          year
+        }
+      });
+    } else if (status === 'paid') {
+      // Navigate to payment details screen for paid months (green ticks)
+      router.push({
+        pathname: '/payment-details',
+        params: {
+          tenantName,
+          roomNumber,
+          month,
+          year
+        }
+      });
+    }
+    // For pending status, do nothing (or you could add a different action)
+  };
+
   return (
     <ThemedView style={styles.container}>
       {/* Months Row */}
@@ -64,7 +95,12 @@ export function PaymentProgress({ year, payments }: PaymentProgressProps) {
           {months.map((month) => {
             const status = payments[month] || 'pending';
             return (
-              <View key={month} style={styles.statusItem}>
+              <TouchableOpacity 
+                key={month} 
+                style={styles.statusItem}
+                onPress={() => handleStatusPress(month, status)}
+                disabled={status === 'pending'}
+              >
                 <ThemedText 
                   style={[
                     styles.statusIcon, 
@@ -73,7 +109,7 @@ export function PaymentProgress({ year, payments }: PaymentProgressProps) {
                 >
                   {getStatusIcon(status)}
                 </ThemedText>
-              </View>
+              </TouchableOpacity>
             );
           })}
         </View>

@@ -87,7 +87,7 @@ export default function ApartmentDetailScreen() {
           <ThemedText type="defaultSemiBold">Andrew</ThemedText>
           <ThemedText> ₹ 3500 </ThemedText>
         </ThemedView>
-        <PaymentProgress year="2023" payments={room1Payments} />
+        <PaymentProgress year="2023" payments={room1Payments} tenantName="Andrew" roomNumber="Room 1" />
       </Card>
 
       <Card>
@@ -99,7 +99,7 @@ export default function ApartmentDetailScreen() {
           <ThemedText type="defaultSemiBold">John</ThemedText>
           <ThemedText> ₹ 3500</ThemedText>
         </ThemedView>
-        <PaymentProgress year="2023" payments={room2Payments} />
+        <PaymentProgress year="2023" payments={room2Payments} tenantName="John" roomNumber="Room 2" />
       </Card>
 
       <Card>
@@ -111,7 +111,7 @@ export default function ApartmentDetailScreen() {
           <ThemedText type="defaultSemiBold">Sarah</ThemedText>
           <ThemedText> ₹ 3500</ThemedText>
         </ThemedView>
-        <PaymentProgress year="2023" payments={room3Payments} />
+        <PaymentProgress year="2023" payments={room3Payments} tenantName="Sarah" roomNumber="Room 3" />
       </Card>
 
       <Card>
@@ -123,7 +123,7 @@ export default function ApartmentDetailScreen() {
           <ThemedText type="defaultSemiBold">Mike</ThemedText>
           <ThemedText> ₹ 3500</ThemedText>
         </ThemedView>
-        <PaymentProgress year="2023" payments={room4Payments} />
+        <PaymentProgress year="2023" payments={room4Payments} tenantName="Mike" roomNumber="Room 4" />
       </Card>
     </ScrollView>
   );
