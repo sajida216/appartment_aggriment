@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import { StyleSheet } from 'react-native';
 
 import { Card } from '@/components/Card';
 import { HelloWave } from '@/components/HelloWave';
@@ -8,6 +9,12 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
+  const router = useRouter();
+
+  const handleCardPress = () => {
+    router.push('/apartment-detail?name=SkyLine Apartments');
+  };
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -22,15 +29,16 @@ export default function HomeScreen() {
         <HelloWave />
       </ThemedView>
       
-      {/* Example 4: Card with complex content */}
-      <Card 
-        title="SkyLine Apartments" 
-        style={styles.complexCard}
-        lightColor="#f0f8ff"
-        darkColor="#1a1a2e"
-        padding={20}
-        borderRadius={16}
-        elevation={4}>
+              {/* Example 4: Card with complex content */}
+        <Card 
+          title="SkyLine Apartments" 
+          style={styles.complexCard}
+          lightColor="#f0f8ff"
+          darkColor="#1a1a2e"
+          padding={20}
+          borderRadius={16}
+          elevation={4}
+          onPress={handleCardPress}>
        <ThemedView  
         lightColor="#f0f8ff"
         darkColor="#1a1a2e"

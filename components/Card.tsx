@@ -1,6 +1,6 @@
 import { useThemeColor } from '@/hooks/useThemeColor';
 import React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 
@@ -19,6 +19,8 @@ export interface CardProps {
   shadowOffset?: { width: number; height: number };
   shadowOpacity?: number;
   shadowRadius?: number;
+  onPress?: () => void;
+  disabled?: boolean;
 }
 
 export function Card({
@@ -36,6 +38,8 @@ export function Card({
   shadowOffset = { width: 0, height: 2 },
   shadowOpacity = 0.1,
   shadowRadius = 4,
+  onPress,
+  disabled = false,
   ...otherProps
 }: CardProps) {
   const backgroundColor = useThemeColor(
@@ -56,7 +60,7 @@ export function Card({
     shadowRadius,
   };
 
-  return (
+  const CardContent = (
     <ThemedView
       style={[styles.card, cardStyle, style]}
       lightColor={lightColor}
@@ -72,6 +76,21 @@ export function Card({
       {children && <View style={styles.content}>{children}</View>}
     </ThemedView>
   );
+
+  if (onPress) {
+    return (
+      <TouchableOpacity
+        onPress={onPress}
+        disabled={disabled}
+        activeOpacity={0.7}
+        style={styles.touchable}
+      >
+        {CardContent}
+      </TouchableOpacity>
+    );
+  }
+
+  return CardContent;
 }
 
 const styles = StyleSheet.create({
@@ -83,5 +102,8 @@ const styles = StyleSheet.create({
   },
   content: {
     // Content styling
+  },
+  touchable: {
+    // Touchable styling
   },
 }); 
