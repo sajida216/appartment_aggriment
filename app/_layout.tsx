@@ -21,6 +21,12 @@ export default function RootLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen name="add-apartment" options={{ headerShown: false }} />
+        <Stack.Screen name="add-payment" options={{ headerShown: false }} />
+        <Stack.Screen name="payment-details" options={{ headerShown: false }} />
+        <Stack.Screen name="room-management" options={{ headerShown: false }} />
+        <Stack.Screen name="edit-room" options={{ headerShown: false }} />
+        <Stack.Screen name="apartment-detail" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

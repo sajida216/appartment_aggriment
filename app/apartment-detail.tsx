@@ -4,12 +4,19 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function ApartmentDetailScreen() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const apartmentName = params.name as string || 'SkyLine Apartments';
+
+  const handleRoomManagement = () => {
+    router.push({
+      pathname: '/room-management',
+      params: { apartmentName }
+    });
+  };
 
   // Sample payment data for each room
   const room1Payments: { [month: string]: 'paid' | 'unpaid' | 'pending' } = {
@@ -75,7 +82,12 @@ export default function ApartmentDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       <ThemedView style={styles.header}>
-        <ThemedText type="title">{apartmentName}</ThemedText>
+        <ThemedView style={styles.headerContent}>
+          <ThemedText type="title">{apartmentName}</ThemedText>
+          <TouchableOpacity style={styles.manageButton} onPress={handleRoomManagement}>
+            <ThemedText style={styles.manageButtonText}>Manage Rooms</ThemedText>
+          </TouchableOpacity>
+        </ThemedView>
       </ThemedView>
 
       <Card>
@@ -136,6 +148,22 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     gap: 8,
+  },
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  manageButton: {
+    backgroundColor: '#2196F3',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 6,
+  },
+  manageButtonText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: '600',
   },
   infoRow: {
     flexDirection: 'row',
