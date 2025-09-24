@@ -2,12 +2,15 @@ import { Image } from 'expo-image';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, useEffect } from 'react';
-
+import { router } from 'expo-router';
+// import { apartment } from "../Rooms/apartment-detail";
 import { Card } from '@/components/Card';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { isProtectedReactElement } from 'expo-router/build/views/Protected';
+import LogoutIcon from '../Logout-icon';
 
 interface Apartment {
   id: string;
@@ -53,7 +56,7 @@ export default function HomeScreen() {
   }, [params.newApartment]);
 
   const handleCardPress = (apartment: Apartment) => {
-    router.push(`/apartment-detail?name=${apartment.name}`);
+    router.push(`../Rooms/apartment-detail?name=${apartment.name}`);
   };
 
   const handleAddApartment = () => {
@@ -61,6 +64,16 @@ export default function HomeScreen() {
   };
 
   return (
+    <ThemedView style={{ flex: 1 }}>
+    {/* Logout Icon positioned at top right */}
+    <ThemedView style={{
+      position: 'absolute',
+      top: 40,
+      right: 20,
+      zIndex: 10
+    }}>
+      <LogoutIcon />
+    </ThemedView>
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
@@ -68,16 +81,28 @@ export default function HomeScreen() {
           source={require('@/assets/images/partial-react-logo.png')}
           style={styles.reactLogo}
         />
+        
       }>
+ 
+ {/* <LogoutIcon/> */}
       <ThemedView style={styles.headerContainer}>
+      
         <ThemedView style={styles.titleContainer}>
+          
+        
           <ThemedText type="title">Welcome!</ThemedText>
           <HelloWave />
         </ThemedView>
+       
+
         <TouchableOpacity style={styles.addButton} onPress={handleAddApartment}>
           <ThemedText style={styles.addButtonText}>+</ThemedText>
         </TouchableOpacity>
       </ThemedView>
+
+      <TouchableOpacity style={styles.logoutbtn} >
+          <ThemedText style={styles.addButtonText}>+</ThemedText>
+        </TouchableOpacity>
       
       {apartments.length === 0 ? (
         <ThemedView style={styles.emptyState}>
@@ -120,15 +145,8 @@ export default function HomeScreen() {
           </Card>
         ))
       )}
-
-     
-
-      
-
-      
-      
-      
     </ParallaxScrollView>
+    </ThemedView>
   );
 }
 
@@ -164,6 +182,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  //i adeed this 
+  logoutbtn:{
+    flex: 1,
+    paddingTop: 40,
+     paddingRight: 20,
+    alignItems: 'flex-end', // Right side
+     backgroundColor: '#fff',
   },
   stepContainer: {
     gap: 8,

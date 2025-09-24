@@ -1,22 +1,26 @@
 import { Card } from '@/components/Card';
 import { PaymentProgress } from '@/components/PaymentProgress';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '../../components/ThemedText';
+import { ThemedView } from '../../components/ThemedView';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-
-export default function ApartmentDetailScreen() {
+import Addrooms from '@/app/Rooms/add-roomsbtn'; // fixed import
+import { AntDesign, Entypo } from '@expo/vector-icons';
+//import { useNavigation } from '@react-navigation/native';
+// import Paymenthistory from '@/app/Rooms/payment-history';
+export default function ApartmentDetail() {
   const router = useRouter();
   const params = useLocalSearchParams();
   const apartmentName = params.name as string || 'SkyLine Apartments';
 
-  const handleRoomManagement = () => {
-    router.push({
-      pathname: '/room-management',
-      params: { apartmentName }
-    });
-  };
+
+  // const handleRoomManagement = () => {
+  //   router.push({
+  //     pathname: '/room-management',
+  //     params: { apartmentName }
+  //   });
+  // };
 
   // Sample payment data for each room
   const room1Payments: { [month: string]: 'paid' | 'unpaid' | 'pending' } = {
@@ -79,18 +83,34 @@ export default function ApartmentDetailScreen() {
     Dec: 'pending',
   };
 
+  // const handleCardPress = (apartment: Apartment) => {
+  //   router.push(`/payment-history?name=${apartment.name}`);
+  // };
+  const handleCardPress = () => {
+    router.push(`/Rooms/payment-history`);
+  };
+
+  // const handleGoback = () => {
+  //   router.push(`/index`);
+  // };
+
+  // const navigation = useNavigation(); // To go back
+
   return (
     <ScrollView style={styles.container}>
       <ThemedView style={styles.header}>
         <ThemedView style={styles.headerContent}>
-          <ThemedText type="title">{apartmentName}</ThemedText>
-          <TouchableOpacity style={styles.manageButton} onPress={handleRoomManagement}>
-            <ThemedText style={styles.manageButtonText}>Manage Rooms</ThemedText>
+          <TouchableOpacity onPress={() => router.back()}>  {/*onPress={() => navigation.popToTop()}  this is back arrow from all room to home page */}
+            <AntDesign name="arrowleft" size={20} />
           </TouchableOpacity>
+          <ThemedText type="title">{apartmentName}</ThemedText>
+          {/* <TouchableOpacity style={styles.manageButton} onPress={handleRoomManagement}>
+            <ThemedText style={styles.manageButtonText}>Manage Rooms</ThemedText>
+          </TouchableOpacity> */}
         </ThemedView>
       </ThemedView>
 
-      <Card>
+      <Card onPress={handleCardPress}>
         <ThemedView style={styles.infoRow}>
           <ThemedText type="defaultSemiBold">Room 1:</ThemedText>
           <ThemedText>Since 12-Aug-2013</ThemedText>
@@ -137,6 +157,7 @@ export default function ApartmentDetailScreen() {
         </ThemedView>
         <PaymentProgress year="2023" payments={room4Payments} tenantName="Mike" roomNumber="Room 4" />
       </Card>
+      <Addrooms/>
     </ScrollView>
   );
 }
