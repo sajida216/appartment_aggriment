@@ -14,7 +14,7 @@ export default function RoomDetailsScreen() {
       {/* Header  onPress={() => navigation.navigate('apartment-detail')}*/}
       <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="arrowleft" size={20} />
+          <AntDesign name="arrow-left" size={20} />
         </TouchableOpacity>
         <Text style={styles.headerText}>Room 1  Andrew</Text>
       </View>

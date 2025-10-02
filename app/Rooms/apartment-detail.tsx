@@ -101,7 +101,7 @@ export default function ApartmentDetail() {
       <ThemedView style={styles.header}>
         <ThemedView style={styles.headerContent}>
           <TouchableOpacity onPress={() => router.back()}>  {/*onPress={() => navigation.popToTop()}  this is back arrow from all room to home page */}
-            <AntDesign name="arrowleft" size={20} />
+            <AntDesign name="arrow-left" size={20} />
           </TouchableOpacity>
           <ThemedText type="title">{apartmentName}</ThemedText>
           {/* <TouchableOpacity style={styles.manageButton} onPress={handleRoomManagement}>
