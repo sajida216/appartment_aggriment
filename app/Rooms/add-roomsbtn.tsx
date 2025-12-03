@@ -19,7 +19,7 @@ export default function Addrooms() {
             <Card>
                 <ThemedView style={styles.infoRow}>
                     <TouchableOpacity style={styles.addButton} onPress={handleAddRoom}>
-                        <ThemedText style={styles.addRoomButtonText} >+</ThemedText>
+                        <ThemedText style={styles.addRoomButtonText} >ADD ROOM</ThemedText>
                     </TouchableOpacity>
                 </ThemedView>
             </Card>
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
+        //flexDirection: 'row',
         // justifyContent: 'space-between',
         marginBottom: 8,
     },
     addRoomButtonText: {
-        color: 'black',
-        fontSize: 44,
+        color: '#rgba(229, 21, 21, 0.61)',
+        fontSize: 12,
         fontWeight: '600',
         justifyContent: 'center',
         alignItems: 'center',

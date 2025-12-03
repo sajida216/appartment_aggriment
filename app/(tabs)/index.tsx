@@ -10,7 +10,8 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { isProtectedReactElement } from 'expo-router/build/views/Protected';
-import LogoutIcon from '../Logout-icon';
+import { View } from 'react-native-reanimated/lib/typescript/Animated';
+//import LogoutIcon from '../Logout-icon';
 
 interface Apartment {
   id: string;
@@ -60,7 +61,11 @@ export default function HomeScreen() {
   };
 
   const handleAddApartment = () => {
-    router.push('/add-apartment');
+    router.push('/Rooms/add-apartment');
+  };
+
+  const handleSettingsIcon = () => {
+    router.push('/Settingsicon');
   };
 
   return (
@@ -72,9 +77,16 @@ export default function HomeScreen() {
       right: 20,
       zIndex: 10
     }}>
-      <LogoutIcon />
+      {/* <LogoutIcon />
+       */}
     </ThemedView>
-    <ParallaxScrollView
+
+    <ThemedView style={styles.settingsbtn}> 
+        <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsIcon}>
+          <ThemedText style={styles.addButtonText  } > A</ThemedText>
+        </TouchableOpacity>
+        </ThemedView>
+    {/* <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
       headerImage={
         <Image
@@ -82,27 +94,26 @@ export default function HomeScreen() {
           style={styles.reactLogo}
         />
         
-      }>
+      }> */}
  
  {/* <LogoutIcon/> */}
-      <ThemedView style={styles.headerContainer}>
+      {/* <ThemedView style={styles.headerContainer}> */}
       
-        <ThemedView style={styles.titleContainer}>
-          
-        
+        {/* <ThemedView style={styles.titleContainer}>
           <ThemedText type="title">Welcome!</ThemedText>
           <HelloWave />
-        </ThemedView>
+        </ThemedView> */}
        
-
+        <ThemedView style={styles.addbtn}>
         <TouchableOpacity style={styles.addButton} onPress={handleAddApartment}>
-          <ThemedText style={styles.addButtonText}>+</ThemedText>
+          <ThemedText style={styles.PlusButtonText} >+</ThemedText>
         </TouchableOpacity>
-      </ThemedView>
-
-      <TouchableOpacity style={styles.logoutbtn} >
+        </ThemedView>
+      {/* </ThemedView> */}
+      
+      {/* <TouchableOpacity style={styles.logoutbtn} >
           <ThemedText style={styles.addButtonText}>+</ThemedText>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       
       {apartments.length === 0 ? (
         <ThemedView style={styles.emptyState}>
@@ -145,7 +156,7 @@ export default function HomeScreen() {
           </Card>
         ))
       )}
-    </ParallaxScrollView>
+    {/* </ParallaxScrollView> */}
     </ThemedView>
   );
 }
@@ -156,6 +167,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 20,
+    
   },
   titleContainer: {
     flexDirection: 'row',
@@ -180,39 +192,81 @@ const styles = StyleSheet.create({
   },
   addButtonText: {
     color: 'white',
-    fontSize: 24,
+    fontSize: 25,
+    fontWeight: 'bold',
+    right:2,
+  },
+  PlusButtonText:{
+    color: 'white',
+    fontSize: 25,
     fontWeight: 'bold',
   },
+  addbtn:{
+  position: 'absolute',  // makes it float over other elements
+  bottom: 20,            // distance from bottom
+  right: 50,             // distance from right
+  zIndex: 10,            // ensures it stays above the card
+  alignItems: 'center',
+  justifyContent: 'center'
+//     flex:1,
+//     paddingTop:100,
+//   paddingRight:30,
+// alignItems:'flex-end',
+ },
+
+ settingsButton:{
+   backgroundColor: '#c9455baa',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+ 
+  settingsbtn:{
+    flex:1,
+    paddingTop:50,
+  paddingRight:30,
+alignItems:'flex-end',
+ },
   //i adeed this 
-  logoutbtn:{
-    flex: 1,
-    paddingTop: 40,
-     paddingRight: 20,
-    alignItems: 'flex-end', // Right side
-     backgroundColor: '#fff',
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+  // logoutbtn:{
+  //   flex: 1,
+  //   paddingTop: 40,
+  //    paddingRight: 20,
+  //   alignItems: 'flex-end', // Right side
+  //    backgroundColor: '#fff',
+  // },
+  // stepContainer: {
+  //   gap: 8,
+  //   marginBottom: 8,
+  // },
+  // reactLogo: {
+  //   height: 178,
+  //   width: 290,
+  //   bottom: 0,
+  //   left: 0,
+  //   position: 'absolute',
+  // },
   complexCard: {
-    marginBottom: 16,
+    marginBottom: 10,
   },
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginBottom: 25,
   },
-  marginTop: {
-    marginTop: 8,
-  },
+  // marginTop: {
+  //   marginTop: 2,
+  // },
   emptyState: {
     alignItems: 'center',
     justifyContent: 'center',

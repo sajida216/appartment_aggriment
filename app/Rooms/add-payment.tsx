@@ -80,7 +80,7 @@ export default function AddPaymentScreen() {
           </ThemedView>
 
           <ThemedView style={styles.inputContainer}>
-            <ThemedText style={styles.label}>Amount</ThemedText>
+            {/* <ThemedText style={styles.label}><ThemedText>Amount</ThemedText></ThemedText> */}
             <TextInput
               style={styles.amountInput}
               value={amount}
@@ -153,6 +153,10 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flex: 1,
+     flexDirection: 'row',  // row of containers
+  gap: 16,               // space between them
+  marginBottom: 20,
+  alignItems: 'flex-start',
   },
   dateInput: {
     flexDirection: 'row',
@@ -163,6 +167,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     backgroundColor: '#F8F8F8',
+    width: '90%'
   },
   dateText: {
     fontSize: 16,
@@ -174,18 +179,28 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '600',
-    marginBottom: 8,
-    color: '#333',
+    marginBottom: 1,
   },
   amountInput: {
-    borderWidth: 1,
-    borderColor: '#E0E0E0',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    backgroundColor: '#F8F8F8',
-    color: '#333',
+     borderWidth: 1,
+     backgroundColor: '#F8F8F8',
+  borderColor: '#ccc',
+  borderRadius: 8,
+  paddingVertical: 13,
+  paddingHorizontal: 13,
+  fontSize: 14,
+  width: '90%',
+  height: 48,
+    // borderWidth: 1,
+    // borderColor: '#E0E0E0',
+    // borderRadius: 8,
+    // padding: 10,
+    // fontSize: 16,
+    // backgroundColor: '#F8F8F8',
+    // color: '#333',
+   
   },
+  
   notesContainer: {
     marginBottom: 30,
   },
