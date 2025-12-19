@@ -120,19 +120,19 @@ export default function ApartmentDetail() {
 
       <Card onPress={handleCardPress}>
         <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Room 1:</ThemedText>
+          <ThemedText type="defaultSemiBold">Room 1</ThemedText>
           <ThemedText>Since 12-Aug-2013</ThemedText>
         </ThemedView>
         <ThemedView style={styles.infoRow}>
           <ThemedText type="defaultSemiBold">Andrew</ThemedText>
           <ThemedText> ₹ 3500 </ThemedText>
         </ThemedView>
-        <PaymentProgress year="2023" payments={room1Payments} tenantName="Andrew" roomNumber="Room 1" />
+        <PaymentProgress year='2036' payments={room1Payments} tenantName="Andrew" roomNumber="Room 1" />
       </Card>
 
       <Card onPress={handleCardPress}>
         <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Room 2:</ThemedText>
+          <ThemedText type="defaultSemiBold">Room 2</ThemedText>
           <ThemedText>Since 12-Aug-2013</ThemedText>
         </ThemedView>
         <ThemedView style={styles.infoRow}>
@@ -144,7 +144,7 @@ export default function ApartmentDetail() {
 
       <Card onPress={handleCardPress}>
         <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Room 3:</ThemedText>
+          <ThemedText type="defaultSemiBold">Room 3</ThemedText>
           <ThemedText>Since 12-Aug-2013</ThemedText>
         </ThemedView>
         <ThemedView style={styles.infoRow}>
@@ -156,7 +156,7 @@ export default function ApartmentDetail() {
 
       <Card onPress={handleCardPress}>
         <ThemedView style={styles.infoRow}>
-          <ThemedText type="defaultSemiBold">Room 4:</ThemedText>
+          <ThemedText type="defaultSemiBold">Room 4</ThemedText>
           <ThemedText>Since 12-Aug-2013</ThemedText>
         </ThemedView>
         <ThemedView style={styles.infoRow}>
@@ -175,6 +175,8 @@ const styles = StyleSheet.create({
   fontSize: 22,
   fontWeight: 'bold',
   color: '#222',
+  //textAlign: 'center',
+  flex: 1, 
 },
   container: {
     flex: 1,
@@ -183,7 +185,8 @@ const styles = StyleSheet.create({
   flexDirection: 'row',
   alignItems: 'center',
   marginTop: 40,       // gives space from top (like most mobile apps)
-  marginBottom: 20,    // some space below the header
+  marginBottom: 20,
+  justifyContent: 'space-between',    // some space below the header
 },
 backButton: {
   marginRight: 10,     // space between arrow and title

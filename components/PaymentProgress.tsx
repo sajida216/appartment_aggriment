@@ -88,9 +88,9 @@ export function PaymentProgress({ year, payments, tenantName = 'John', roomNumbe
 
       {/* Year and Status Row */}
       <View style={styles.yearStatusRow}>
-        <ThemedText style={[styles.yearText, { color: textColor }]}>
+        {/* <ThemedText style={[styles.yearText, { color: textColor }]}>
           '{year.slice(-2)}
-        </ThemedText>
+        </ThemedText> */}
         <View style={styles.statusContainer}>
           {months.map((month) => {
             const status = payments[month] || 'pending';

@@ -28,7 +28,7 @@ export default function AddApartmentScreen() {
       });
     }
 
-    setRooms(newRooms);
+   // setRooms(newRooms);
   };
 
   const handleSave = () => {
@@ -47,7 +47,7 @@ export default function AddApartmentScreen() {
       return;
     }
 
-    const occupiedRooms = rooms.filter(room => room.tenantName.trim() !== '').length;
+    //const occupiedRooms = rooms.filter(room => room.tenantName.trim() !== '').length;
 
     Alert.alert(
       'Success',
@@ -64,7 +64,7 @@ export default function AddApartmentScreen() {
                   name: apartmentName,
                   address: address,
                   totalRooms: rooms.length,
-                  occupiedRooms: occupiedRooms,
+                 // occupiedRooms: occupiedRooms,
                   rentDue: 0
                 })
               }

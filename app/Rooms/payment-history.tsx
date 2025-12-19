@@ -8,13 +8,16 @@ export default function RoomDetailsScreen() {
   const navigation = useNavigation(); // To go back
   const router = useRouter();
 
+  const handleAgreemnt = () => {
+     router.push('/Rooms/agreement');
+  };
   return (
     <ScrollView contentContainerStyle={styles.container}>
       
       {/* Header  onPress={() => navigation.navigate('apartment-detail')}*/}
       <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="arrow-left" size={20} />
+          <AntDesign name="arrow-left" size={22} style={{marginRight:100}}/>
         </TouchableOpacity>
         <Text style={styles.headerText}>Room 1  Andrew</Text>
       </View>
@@ -30,12 +33,14 @@ export default function RoomDetailsScreen() {
           <Text style={styles.addedText}>Added Andrew</Text>
           <Text style={styles.metaText}>Joined 12-Jan-2024     Deposited ₹12,000</Text>
         </View>
+         <TouchableOpacity onPress={handleAgreemnt}>
         <Entypo name="menu" size={24} color="black" />
+        </TouchableOpacity>
       </View>
 
       {/* Transactions */}
       <View style={styles.card}>
-        <View style={styles.cardRow}>
+        <View >
           <Text style={styles.amount}>₹12,000</Text>
           <Text style={styles.metaText}>Deposite</Text>
         </View>
@@ -44,7 +49,7 @@ export default function RoomDetailsScreen() {
       </View>
 
       <View style={styles.card}>
-        <View style={styles.cardRow}>
+        <View>
           <Text style={styles.amount}>₹ 3500</Text>
           <Text style={styles.metaText}>Jan - 2024</Text>
         </View>
@@ -69,15 +74,25 @@ export default function RoomDetailsScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
+    padding: 7,
     backgroundColor: '#fff',
     minHeight: '100%', 
   },
   header: {
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#e0e0e0',
-    padding: 10,
+  alignItems: 'center',
+  padding: 12,
+  marginTop: 35,
+
+  // 🔽 Bottom line
+  borderBottomWidth: 1,
+  borderBottomColor: '#e5e5e57c',
+
+  // 🔽 iOS bottom shadow only
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.12,
+  shadowRadius: 3,
   },
   headerText: {
     fontSize: 16,
@@ -89,6 +104,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    borderRadius: 5,
   },
   removedText: {
     color: '#000',
@@ -101,6 +117,12 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     alignItems: 'center',
+    borderRadius: 5,
+    // shadowColor:'#000',
+    // shadowOffset:{width:0, height:2},
+    // shadowOpacity:0.25,
+    // shadowRadius:3.84,
+
   },
   addedText: {
     fontWeight: 'bold',
@@ -110,14 +132,32 @@ const styles = StyleSheet.create({
     color: '#444',
   },
   card: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    marginBottom: 10,
-  },
-  cardRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
+  backgroundColor: '#f7f7f7',
+  padding: 14,
+  marginBottom: 12,
+  borderRadius: 12,
+
+  // ✅ Android shadow
+  elevation: 5,
+
+  // ✅ iOS shadow
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 3 },
+  shadowOpacity: 0.15,
+  shadowRadius: 5,
+},
+
+  // card: {
+  //   backgroundColor: '#f7f7f787',
+  //   padding: 10,
+  //   marginBottom: 10,
+  
+  // },
+  // cardRow: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+    
+  // },
   amount: {
     fontWeight: 'bold',
     fontSize: 16,

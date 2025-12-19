@@ -10,7 +10,10 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { isProtectedReactElement } from 'expo-router/build/views/Protected';
-import { View } from 'react-native-reanimated/lib/typescript/Animated';
+//import { View } from 'react-native-reanimated/lib/typescript/Animated';
+import { View } from 'react-native';
+import { Colors } from '@/constants/Colors';
+import { ScrollView} from 'react-native';
 //import LogoutIcon from '../Logout-icon';
 
 interface Apartment {
@@ -41,7 +44,32 @@ export default function HomeScreen() {
       totalRooms: 15,
       occupiedRooms: 10,
       rentDue: 2
-    }
+    },
+    {
+      id: '3',
+      name: 'Sunset Gardens',
+      address: '456 Oak Avenue',
+      totalRooms: 15,
+      occupiedRooms: 10,
+      rentDue: 3
+    },
+    {
+      id: '4',
+      name: 'SkyLine Apartments',
+      address: '123 Main Street',
+      totalRooms: 20,
+      occupiedRooms: 12,
+      rentDue: 4
+    },
+    {
+      id: '5',
+      name: 'SkyLine Apartments',
+      address: '123 Main Street',
+      totalRooms: 20,
+      occupiedRooms: 12,
+      rentDue: 4
+    },
+    
   ]);
 
   // Listen for new apartment data from add apartment screen
@@ -70,109 +98,102 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={{ flex: 1 }}>
-    {/* Logout Icon positioned at top right */}
-    <ThemedView style={{
-      position: 'absolute',
-      top: 40,
-      right: 20,
-      zIndex: 10
-    }}>
-      {/* <LogoutIcon />
-       */}
-    </ThemedView>
 
-    <ThemedView style={styles.settingsbtn}> 
-        <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsIcon}>
-          <ThemedText style={styles.addButtonText  } > A</ThemedText>
-        </TouchableOpacity>
-        </ThemedView>
-    {/* <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-        
-      }> */}
- 
- {/* <LogoutIcon/> */}
-      {/* <ThemedView style={styles.headerContainer}> */}
-      
-        {/* <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Welcome!</ThemedText>
-          <HelloWave />
-        </ThemedView> */}
-       
-        <ThemedView style={styles.addbtn}>
-        <TouchableOpacity style={styles.addButton} onPress={handleAddApartment}>
-          <ThemedText style={styles.PlusButtonText} >+</ThemedText>
-        </TouchableOpacity>
-        </ThemedView>
-      {/* </ThemedView> */}
-      
-      {/* <TouchableOpacity style={styles.logoutbtn} >
-          <ThemedText style={styles.addButtonText}>+</ThemedText>
-        </TouchableOpacity> */}
-      
-      {apartments.length === 0 ? (
-        <ThemedView style={styles.emptyState}>
-          <ThemedText style={styles.emptyStateText}>No apartments yet</ThemedText>
-          <ThemedText style={styles.emptyStateSubtext}>Tap the + button to add your first apartment</ThemedText>
-        </ThemedView>
-      ) : (
-        apartments.map((apartment) => (
-          <Card 
-            key={apartment.id}
-            title={apartment.name} 
-            style={styles.complexCard}
-            lightColor="#f0f8ff"
-            darkColor="#1a1a2e"
-            padding={20}
-            borderRadius={16}
-            elevation={4}
-            onPress={() => handleCardPress(apartment)}>
-            <ThemedView  
-              lightColor="#f0f8ff"
-              darkColor="#1a1a2e"
-              style={styles.infoRow}>
-              <ThemedText type="defaultSemiBold">Rooms Available:</ThemedText>
-              <ThemedText>{apartment.totalRooms - apartment.occupiedRooms}</ThemedText>
-            </ThemedView>
-            <ThemedView 
-              lightColor="#f0f8ff"
-              darkColor="#1a1a2e"
-              style={styles.infoRow}>
-              <ThemedText type="defaultSemiBold">Rooms Occupied:</ThemedText>
-              <ThemedText>{apartment.occupiedRooms}</ThemedText>
-            </ThemedView>
-            <ThemedView  
-              lightColor="#f0f8ff"
-              darkColor="#1a1a2e"
-              style={styles.infoRow}>
-              <ThemedText type="defaultSemiBold">Rent Due:</ThemedText>
-              <ThemedText>{apartment.rentDue}</ThemedText>
-            </ThemedView>
-          </Card>
-        ))
-      )}
-    {/* </ParallaxScrollView> */}
+  {/* SETTINGS BUTTON */}
+  <ThemedView style={styles.settingsbtn}>
+    <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsIcon}>
+      <ThemedText style={styles.addButtonText}>A</ThemedText>
+    </TouchableOpacity>
+  </ThemedView>
+
+  {/* ADD BUTTON */}
+  <ThemedView style={styles.addbtn}>
+    <TouchableOpacity style={styles.addButton} onPress={handleAddApartment}>
+      <ThemedText style={styles.PlusButtonText}>+</ThemedText>
+    </TouchableOpacity>
+  </ThemedView>
+
+  {apartments.length === 0 ? (
+    <ThemedView style={styles.emptyState}>
+      <ThemedText style={styles.emptyStateText}>No apartments yet</ThemedText>
+      <ThemedText style={styles.emptyStateSubtext}>
+        Tap the + button to add your first apartment
+      </ThemedText>
     </ThemedView>
+  ) : (
+    <ScrollView
+      style={{ flex: 1 }}   // ⭐ IMPORTANT
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.listContainer}
+    >
+      {apartments.map((apartment) => (
+        <Card
+          key={apartment.id}
+          title={apartment.name}
+          style={styles.complexCard}
+          lightColor="#f0f8ff"
+          darkColor="#1a1a2e"
+          padding={22}
+          borderRadius={16}
+          elevation={4}
+          onPress={() => handleCardPress(apartment)}
+        >
+          <ThemedView lightColor="#f0f8ff" darkColor="#1a1a2e" style={styles.infoRow}>
+            <ThemedText type="defaultSemiBold" style={{ color: 'green' }}>
+              Rooms Available:
+            </ThemedText>
+            <ThemedText style={{ color: 'green' }}>
+              {apartment.totalRooms - apartment.occupiedRooms}
+            </ThemedText>
+          </ThemedView>
+
+          <ThemedView lightColor="#f0f8ff" darkColor="#1a1a2e" style={styles.infoRow}> 
+          <ThemedText type="defaultSemiBold">Rooms Occupied:</ThemedText> 
+          <ThemedText>{apartment.occupiedRooms}</ThemedText> </ThemedView>
+
+          <ThemedView lightColor="#f0f8ff" darkColor="#1a1a2e" style={styles.infoRow}>
+            <ThemedText type="defaultSemiBold" style={{ color: 'red' }}>
+              Rent Due:
+            </ThemedText>
+            <ThemedText style={{ color: 'red' }}>
+              {apartment.rentDue}
+            </ThemedText>
+          </ThemedView>
+        </Card>
+      ))}
+    </ScrollView>
+  )}
+</ThemedView>
+
   );
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
+  // headerContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-between',
+  //   alignItems: 'center',
+  //   marginBottom: 20,
     
-  },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  // },
+  // titleContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   gap: 8,
+  // },listContainer: {
+  listContainer: {
+  paddingBottom: 120, // ⭐ allows scrolling to last card
+  paddingTop:1,
+},
+// complexCard: {
+//     marginBottom: 10,
+//   },
+complexCard: {
+  marginBottom: 7,
+  // marginBottom: 8,
+},
+   container: {
+    flex: 1,
   },
   addButton: {
     backgroundColor: '#4CAF50',
@@ -234,35 +255,17 @@ const styles = StyleSheet.create({
   settingsbtn:{
     flex:1,
     paddingTop:50,
-  paddingRight:30,
-alignItems:'flex-end',
+    paddingRight:30,
+    alignItems:'flex-end',
+    maxHeight:100,
  },
-  //i adeed this 
-  // logoutbtn:{
-  //   flex: 1,
-  //   paddingTop: 40,
-  //    paddingRight: 20,
-  //   alignItems: 'flex-end', // Right side
-  //    backgroundColor: '#fff',
-  // },
-  // stepContainer: {
-  //   gap: 8,
-  //   marginBottom: 8,
-  // },
-  // reactLogo: {
-  //   height: 178,
-  //   width: 290,
-  //   bottom: 0,
-  //   left: 0,
-  //   position: 'absolute',
-  // },
-  complexCard: {
-    marginBottom: 10,
-  },
+  
+  
   infoRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 25,
+    alignItems:'center',
+    marginBottom: 5,
   },
   // marginTop: {
   //   marginTop: 2,
@@ -281,6 +284,52 @@ alignItems:'flex-end',
   emptyStateSubtext: {
     fontSize: 14,
     color: '#999',
-    textAlign: 'center',
+    //textAlign: 'center',
   },
 });
+//i adeed this 
+  // logoutbtn:{
+  //   flex: 1,
+  //   paddingTop: 40,
+  //    paddingRight: 20,
+  //   alignItems: 'flex-end', // Right side
+  //    backgroundColor: '#fff',
+  // },
+  // stepContainer: {
+  //   gap: 8,
+  //   marginBottom: 8,
+  // },
+  // reactLogo: {
+  //   height: 178,
+  //   width: 290,
+  //   bottom: 0,
+  //   left: 0,
+  //   position: 'absolute',
+  // },
+{/* <ParallaxScrollView
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerImage={
+        <Image
+          source={require('@/assets/images/partial-react-logo.png')}
+          style={styles.reactLogo}
+        />
+        
+      }> */}
+ 
+ {/* <LogoutIcon/> */}
+      {/* <ThemedView style={styles.headerContainer}> */}
+      
+        {/* <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Welcome!</ThemedText>
+          <HelloWave />
+        </ThemedView> */}
+        {/* Logout Icon positioned at top right */}
+    {/* <ThemedView style={{
+      position: 'absolute',
+      top: 40,
+      right: 20,
+      zIndex: 10
+    }}> */}
+      {/* <LogoutIcon />
+       */}
+    {/* </ThemedView> */}
